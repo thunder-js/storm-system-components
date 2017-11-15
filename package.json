@@ -7,11 +7,15 @@
 		"test": "jest"
 	},
 	"dependencies": {
-    "apollo-cache-inmemory": "^0.2.0-rc.4",
+		"apollo-cache-inmemory": "^0.2.0-rc.4",
 		"apollo-client": "^2.0.0-rc.7",
 		"apollo-link-context": "^1.0.0",
 		"apollo-link-error": "^1.0.0",
-		"apollo-link-http": "^1.1.0"
+		"apollo-link-http": "^1.1.0",
+		"redux": "^3.7.2",
+		"redux-logger": "^3.0.6",
+		"redux-thunk": "^2.2.0",
+		"remote-redux-devtools": "^0.5.12"
 	},
 	"devDependencies": {
 		"babel-eslint": "^7.2.3",
