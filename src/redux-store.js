@@ -3,8 +3,9 @@ import { applyMiddleware, createStore } from 'redux';
 import { createLogger } from 'redux-logger';
 import thunk from 'redux-thunk';
 import { composeWithDevTools } from 'remote-redux-devtools';
+import Reactotron from 'reactotron-react-native';
 
-export default (initialState = {}, rootReducer) => {
+export default (initialState = {}, getRootReducer) => {
   const loggerMiddleware = createLogger();
   // ======================================================
   // Store Instantiation and HMR Setup
@@ -18,16 +19,14 @@ export default (initialState = {}, rootReducer) => {
     applyMiddleware(...middlewares.filter(Boolean)),
   );
 
-  // const rootReducer = getRootReducer()
-  const store = createStore(rootReducer, initialState, enhancer);
+  const store = Reactotron.createStore(getRootReducer(), initialState, enhancer);
 
-
-  // if (module.hot) {
-  //   module.hot.accept(() => {
-  //     const nextRootReducer = require('../redux/root-reducer.js').default;
-  //     store.replaceReducer(nextRootReducer);
-  //   });
-  // }
+  if (module.hot) {
+    module.hot.accept(() => {
+      const nextRootReducer = getRootReducer()
+      store.replaceReducer(nextRootReducer);
+    });
+  }
 
   return store;
 };
